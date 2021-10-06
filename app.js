@@ -1,21 +1,26 @@
+
+// Libraries 
+const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const env = require('dotenv').config();
+const cookieParser = require('cookie-parser');
+const auth = require("./routes/auth");
 
+//Intialize Express Server
 const app = express();
+app.use(express.json());
+app.use("/api/v1/auth", auth);
 
-app.get('/api/v1',(req,res)=> {
-    
-    res.status(200)
-    .json({message:'Hello From Server Side',app:'sampleapi'});
-});
-
-app.post('/api/v1/sample01', (req,res) => {
-    res.status(200)
-    .json({message:'Post Menthod - Hello From Server Side',app:'sampleapi'});
-
-});
+mongoose.connect(process.env.COSMOSDB_CONNECTOR, 
+{useNewUrlParser: true}
+)
+.then(() => console.log('Connection to CosmosDB successful'))
+.catch((err) => console.error(err));
 
 const port = 3000;
 
 app.listen(port,() =>{
-console.log(`sample Api app is running on port:${port}`);
+console.log(`Demo Api app is running on port:${port}`)
 });
