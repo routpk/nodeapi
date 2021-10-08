@@ -11,13 +11,13 @@ const auth = require("./routes/auth");
 //Intialize Express Server
 const app = express();
 app.use(express.json());
-app.use("/api/v1/auth", auth);
 
 //DB Connection
 mongoose.connect(process.env.COSMOSDB_CONNECTOR, {useNewUrlParser: true })
 .then(() => console.log('Connection to CosmosDB successful'))
 .catch((err) => console.error(err));
 
+app.use("/api/v1/auth", auth);
 
 //Server Details
 const port = 3000;
