@@ -1,12 +1,10 @@
 const router = require("express").Router();
 const User = require(`../models/User`)
-
-const { body, validationResult } = require("express-validator");
+const validatedSignupSchema = require("../validator/signupValidator");
+const { validationResult } = require("express-validator");
 
 router.post('/signup',
-    body('email','Please Provide valid Email').isEmail(),
-    body('password','Please Provide a Valid Password length').isLength({ min: 6 }),
-    body('name','Name field Should be minimum 6 Char in Length').isLength({ min: 6 }),
+validatedSignupSchema,
     async (req, res) => {
         try {
 
@@ -30,7 +28,6 @@ router.post('/signup',
         } catch (err) {
 
         }
-
     });
 
 module.exports = router
