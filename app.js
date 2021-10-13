@@ -22,7 +22,7 @@ app.use("/api/v1/auth", auth);
 app.use("/api/v1/posts", postRoute);
 
 //Server Details
-const port = 3000;
+const port = 4000;
 app.listen(port, () => {
   console.log(`Demo Api app is running on port:${port}`)
 });
